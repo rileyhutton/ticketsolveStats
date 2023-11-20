@@ -1,0 +1,19 @@
+{
+  "name": "ticketsolvestats",
+  "version": "1.0.0",
+  "description": "Get the stats of any show/event hosted on the Ticketsolve platform.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rileyhutton/ticketsolveStats.git"
+  },
+  "author": "Riley Hutton",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/rileyhutton/ticketsolveStats/issues"
+  },
+  "homepage": "https://github.com/rileyhutton/ticketsolveStats#readme"
+}
