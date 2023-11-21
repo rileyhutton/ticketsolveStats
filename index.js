@@ -14,7 +14,7 @@ function formatURL(urlInput) {
         return result[0]
     }
 }
-async function getShowsXML(clientUrl) {
+async function getShowsArray(clientUrl) {
     const showsXmlUrl = "https://" + clientUrl + "/shows.xml"
     const response = await fetch(showsXmlUrl)
     const content = await response.text()
@@ -35,6 +35,8 @@ async function getShowsXML(clientUrl) {
     return showsArray;
 }
 
+
+
 function logShowList(showsArray) {
     let i = 0;
     showsArray.forEach(function(show) {
@@ -46,7 +48,7 @@ function logShowList(showsArray) {
 
 
 const url = formatURL("lancastergrand")
-getShowsXML(url)
+getShowsArray(url)
     .then((showsArray) => {
         logShowList(showsArray)
     })
