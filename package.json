@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/rileyhutton/ticketsolveStats/issues"
   },
-  "homepage": "https://github.com/rileyhutton/ticketsolveStats#readme"
+  "homepage": "https://github.com/rileyhutton/ticketsolveStats#readme",
+  "devDependencies": {
+    "var_dump": "^1.0.5"
+  },
+  "dependencies": {
+    "xml2js": "^0.6.2"
+  }
 }
