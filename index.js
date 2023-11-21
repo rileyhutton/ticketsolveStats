@@ -25,7 +25,7 @@ async function getShowsArray(clientUrl) {
     showsXml.forEach(function(show) {
         let events = []
         show['events'][0]['event'].forEach(function(event) {
-            events.push(event['feed'][0]['url'][0])
+            events.push({'url': event['feed'][0]['url'][0]})
         })
         let showDict = {'name': show['name'][0].trim(), 'id': show['$']['id'], 'image': show['images'][0]['image'][0]['url'][1]['_'], 'events': events}
         showsArray.push(showDict)
@@ -35,7 +35,27 @@ async function getShowsArray(clientUrl) {
     return showsArray;
 }
 
+async function fetchEvent(eventUrl) {
+    const response = await fetch(eventUrl)
+    const content = await response.text()
+    const data = await xmlParser.parseStringPromise(content)
+    const eventDict = {'name': data['event']['name'][0].trim(), 'available': parseInt(data['event']['available'][0]), 'capacity': parseInt(data['event']['capacity'][0])}
+    eventDict["percent"] = eventDict['available']/eventDict['capacity']
+    return eventDict;
+}
 
+async function getEventsInfo(show) {
+    const events = show["events"]
+    let eventsInfo = []
+    events.forEach(function(event) {
+        fetchEvent(event['url'])
+            .then((eventInfo) => {
+                eventsInfo.push(eventInfo)
+                }
+            )
+    })
+    return eventsInfo
+}
 
 function logShowList(showsArray) {
     let i = 0;
@@ -51,5 +71,9 @@ const url = formatURL("lancastergrand")
 getShowsArray(url)
     .then((showsArray) => {
         logShowList(showsArray)
+        getEventsInfo(showsArray[69])
+            .then((eventsArray) => {
+                console.log(eventsArray)
+            })
     })
 
